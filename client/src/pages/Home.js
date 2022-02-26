@@ -27,8 +27,9 @@ const news_data = [
 const Home = () => {
   return (
     <div>
-      <h1>HOME PAGE</h1>
-      <News data={news_data} />
+      <div className="flex justify-center">
+        <News data={news_data} />
+      </div>
       <scrap />
     </div>
   );
