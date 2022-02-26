@@ -4,18 +4,20 @@ import requests
 from pip._vendor import cachecontrol
 import db.database as db
 
+
 app = Flask(__name__)
-app.secret_key="Hello"
+def init_database():
+    city = db.init_cities()
 
 @app.route("/")
 def index():
-    db.get_all_news()
-    return render_template("index.html")
+    news = db.get_all_news()
+    return news
 
 @app.route('/<string:city>')
 def load_city(city):
-    db.get_city_news(city)
-    return render_template("match.html", match=match)
+    city_news = db.get_city_news(city)
+    return city_news
 
 
 if __name__ == "__main__":
