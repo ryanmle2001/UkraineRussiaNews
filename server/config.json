@@ -1,9 +1,0 @@
-{
-    "mongo_db": "storedgmail",
-    "mongo_user": "admin",
-    "mongo_host": "4440cluster0.m6n7n.mongodb.net",
-    "mongo_password": "helloworld",
-    "mongo_collection_user": "storedgmail",
-    "mongo_collection_emails": "taggedemails",
-    "mongo_port": "27017"
-}

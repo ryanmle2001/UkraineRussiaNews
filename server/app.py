@@ -29,6 +29,7 @@ def load_city(city):
     if city not in cities:
         return redirect("/")
     news = db.get_city_news(city)
+    city = db.get_city(city)
     data = {
         "data": {
             "city": city,

@@ -5,8 +5,10 @@ import json
 import requests
 
 
-# connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
-client = MongoClient("localhost:27017")
+f = open('config.json')
+config = json.load(f)
+f.close()
+client = MongoClient(f"mongodb+srv://admin:{config['mongo_password']}@cluster0.fhqco.mongodb.net/ua_ru_news?retryWrites=true&w=majority")
 db = client.ua_ru_news
 
 '''
@@ -48,11 +50,15 @@ def init_cities():
             file.write("\n")
     db.city.insert_many(large_cities)
 
+def get_city(city):
+    city = db.city.find_one({"name": city.lower()})
+    return dumps(list(city))
+
 def update_city_news(city, newsId):
     db.city.update_one({"city": city}, {"$push": {"news": newsId}})
 
 def get_city_news(city):
-    news_ids = db.city.find({"city": city}, {"events":1})
+    news_ids = list(db.city.find({"city": city}, {"events":1, "_id": 0}))
     news = []
     news = db.news.find({"newsId": {"$in": news_ids}})
     return dumps(list(news))
