@@ -1,12 +1,15 @@
 from flask import Flask, url_for, render_template, request, redirect, abort, jsonify, session, flash, make_response
-import os
+from flask_cors import CORS #comment this on deployment
 import requests
 from pip._vendor import cachecontrol
 import models as db
 
-cities = set()
-app = Flask(__name__)
 
+app = Flask(__name__)
+app.secret_key="123"
+CORS(app)
+
+cities = set()
 with open("ua_cities.json") as file:
     data = file.readlines()
     for i in data:
@@ -40,4 +43,4 @@ def load_city(city):
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", debug=True)
+    app.run(debug=True)
