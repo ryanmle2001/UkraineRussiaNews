@@ -16,6 +16,7 @@ import {AiOutlineMenu} from 'react-icons/ai';
 import {Spacer} from '@material-ui/core'; 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import FontLink from '../../components/FontLink';
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
@@ -42,16 +43,16 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar color="transparent" position="static" sx={{py: 2}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters color="transparent">
           <Typography
-            variant="h6"
+            variant="h3"
             noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            color="black"
+            sx={{ mx: 'auto'}}
           >
-            UNews
+           Ukraine
           </Typography>
 
           <Typography
@@ -59,6 +60,7 @@ const Navbar = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            className="font-link"
           >
             LOGO
           </Typography>

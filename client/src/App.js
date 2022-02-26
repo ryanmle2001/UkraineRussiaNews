@@ -4,6 +4,7 @@ import Navbar from "./pages/Navbar/Navbar";
 import Search from "./pages/Search/Search";
 import {Box} from '@material-ui/core';
 
+
 function App() {
   return (
     <>

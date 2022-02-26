@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, TextField } from "@material-ui/core";
 import Autocomplete from '@mui/material/Autocomplete';
+
 const options = ["Option 1", "Option 2"];
 
 const Search = () => {
