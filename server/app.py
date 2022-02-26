@@ -6,6 +6,7 @@ import models as db
 
 cities = set()
 app = Flask(__name__)
+
 with open("ua_cities.json") as file:
     data = file.readlines()
     for i in data:
