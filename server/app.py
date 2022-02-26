@@ -14,14 +14,28 @@ with open("ua_cities.json") as file:
 @app.route("/")
 def index():
     news = db.get_all_news()
-    return jsonify(news)
+    data = {
+        "data": {
+            "countries": list(cities),
+            "news": news
+
+        }
+    }
+
+    return jsonify(data)
 
 @app.route('/<string:city>')
 def load_city(city):
     if city not in cities:
         return redirect("/")
-    city_news = db.get_city_news(city)
-    return jsonify(city_news)
+    news = db.get_city_news(city)
+    data = {
+        "data": {
+            "city": city,
+            "news": news
+        }
+    }
+    return jsonify(data)
 
 
 if __name__ == "__main__":
