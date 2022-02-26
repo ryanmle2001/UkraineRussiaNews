@@ -52,15 +52,14 @@ def update_city_news(city, newsId):
     db.city.update_one({"city": city}, {"$push": {"news": newsId}})
 
 def get_city_news(city):
-    newsId_all = db.city.find({"city": city}, {"events":1})
+    news_ids = db.city.find({"city": city}, {"events":1})
     news = []
-    for newsId in newsId_all:
-        news.append(db.news.find({"newsId":newsId}))
-    return news
+    news = db.news.find({"newsId": {"$in": news_ids}})
+    return dumps(list(news))
 
 def get_all_news():
     news = db.news.find({})
-    return news
+    return dumps(list(news))
 
 def insert_news(news):
     db.news.insert_one(news)
