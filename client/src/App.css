@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+/* Font Link */
+.font-link {
+  font-family: 'Noto Sans Georgian', sans-serif;
+}
