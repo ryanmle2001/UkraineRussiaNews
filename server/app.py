@@ -17,9 +17,8 @@ def index():
     news = db.get_all_news()
     data = {
         "data": {
-            "countries": list(cities),
+            "cities": list(cities),
             "news": news
-
         }
     }
 
@@ -41,4 +40,4 @@ def load_city(city):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="localhost", debug=True)

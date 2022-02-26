@@ -25,6 +25,7 @@ city: String
 date: Datetime (current time - <span class= timeAlert>) 
 header: String 
 body: String 
+image: String 
 url: String
 """
 
