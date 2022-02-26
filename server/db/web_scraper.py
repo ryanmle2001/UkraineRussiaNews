@@ -6,8 +6,22 @@ def scrape_article(topic):
     entries = scraped["entries"]
 
     num_articles = 5
+    articles = []
 
-    return entries[:num_articles]
+    for entry in entries:
+        if num_articles == 0:
+            break
+        article = {
+            "title" : entry["title"],
+            "link" : entry["link"],
+            "published" : entry["published"],
+            "simmary" : entry["summary"],
+            "source" : entry["source"]
+        }
+        articles.append(article)
+        num_articles -= 1
+
+    return articles
 
 # entry is a dictionary that can return the information below
 #
