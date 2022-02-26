@@ -39,7 +39,6 @@ def init_cities():
 def update_city_news(city, newsId):
     db.city.update_one({"city": city}, {"$push": {"news": newsId}})
 
-
 def get_city_news(city):
     with open("ua_cities.json") as file:
         data = file.readline()
