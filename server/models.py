@@ -4,6 +4,7 @@ from bson.json_util import dumps
 import json
 import requests
 
+
 # connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
 client = MongoClient("localhost:27017")
 db = client.ua_ru_news
@@ -42,17 +43,15 @@ def init_cities():
             large_cities.append(city_json)
             city_file.append(city["city"].lower())
     with open("ua_cities.json", "w") as file:
-        json.dump(city_file, file)
-    #db.city.insert_many(large_cities)
+        for city in city_file:
+            file.write(city)
+            file.write("\n")
+    db.city.insert_many(large_cities)
 
 def update_city_news(city, newsId):
     db.city.update_one({"city": city}, {"$push": {"news": newsId}})
 
 def get_city_news(city):
-    with open("ua_cities.json") as file:
-        data = file.readline()
-        if city.lower() not in data:
-            return False
     newsId_all = db.city.find({"city": city}, {"events":1})
     news = []
     for newsId in newsId_all:
@@ -62,6 +61,9 @@ def get_city_news(city):
 def get_all_news():
     news = db.news.find({})
     return news
+
+def insert_news(news):
+    db.news.insert_one(news)
 
 if __name__ == "__main__":
     init_cities()

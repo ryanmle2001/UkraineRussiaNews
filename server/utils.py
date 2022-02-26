@@ -1,4 +1,5 @@
 from pygooglenews import GoogleNews
+import models as db
 
 def scrape_article(topic):
     gn = GoogleNews(lang = 'en', country = 'US')
@@ -15,7 +16,7 @@ def scrape_article(topic):
             "title" : entry["title"],
             "link" : entry["link"],
             "published" : entry["published"],
-            "simmary" : entry["summary"],
+            "summary" : entry["summary"],
             "source" : entry["source"]
         }
         articles.append(article)

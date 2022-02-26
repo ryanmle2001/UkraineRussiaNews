@@ -4,13 +4,12 @@ import requests
 from pip._vendor import cachecontrol
 import models as db
 
+cities = set()
 app = Flask(__name__)
-
-def create_app():
-    app = Flask(__name__)
-    cors.init_app(app)
-
-    return app
+with open("ua_cities.json") as file:
+    data = file.readlines()
+    for i in data:
+        cities.add(i.strip())
 
 @app.route("/")
 def index():
@@ -19,9 +18,9 @@ def index():
 
 @app.route('/<string:city>')
 def load_city(city):
-    city_news = db.get_city_news(city)
-    if city_news == False:
+    if city not in cities:
         return redirect("/")
+    city_news = db.get_city_news(city)
     return jsonify(city_news)
 
 
