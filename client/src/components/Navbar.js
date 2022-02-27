@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { BsFillMapFill } from "react-icons/bs";
 
 const Navbar = () => {
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,7 +36,13 @@ const Navbar = () => {
     <AppBar color="transparent" position="static" sx={{ py: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters color="transparent">
-          <Typography variant="h3" color="cyan" noWrap color="black" sx={{ mx: "auto" }}>
+          <Typography
+            variant="h3"
+            color="cyan"
+            noWrap
+            color="black"
+            sx={{ mx: "auto" }}
+          >
             <Link to="/">UMonitor</Link>
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
@@ -62,7 +69,15 @@ const Navbar = () => {
             >
               <Link to="/map">
                 <MenuItem key={"map"} spacing={2} onClick={handleCloseUserMenu}>
-                <BsFillMapFill color="blue" />  <Typography sx={{marginLeft: 2}} component={Link} to="/map" textAlign="center">Map</Typography>
+                  <BsFillMapFill color="blue" />{" "}
+                  <Typography
+                    sx={{ marginLeft: 2 }}
+                    component={Link}
+                    to="/map"
+                    textAlign="center"
+                  >
+                    Map
+                  </Typography>
                 </MenuItem>
               </Link>
             </Menu>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -15,10 +15,14 @@ const News = ({
       header: "",
       image: null,
       newsId: "",
-      url: "https://www.cnn.com/europe/live-news/ukraine-russia-news-02-26-22/index.html",
+      url: "",
     },
   ],
 }) => {
+  useEffect(() => {
+    console.log("News -> ", data);
+  }, [data]);
+
   return (
     <>
       <div className="flex flex-col w-2/3 justify-center gap-y-5 px-4 py-7">
