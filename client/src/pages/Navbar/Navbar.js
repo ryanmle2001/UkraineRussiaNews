@@ -18,6 +18,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import FontLink from "../../components/FontLink";
 import { Link } from "react-router-dom";
+import "../../App.css"
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -46,7 +47,7 @@ const Navbar = () => {
     <AppBar color="transparent" position="static" sx={{ py: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters color="transparent">
-          <Typography variant="h3" noWrap color="black" sx={{ mx: "auto" }}>
+          <Typography className="font" variant="h3" noWrap color="black" sx={{ mx: "auto" }}>
             Ukraine
           </Typography>
 

@@ -15,17 +15,17 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 5000);
     return () => {};
   }, []);
 
   return (
     <>
       {loading ? (
-        <Box sx={{position: 'fixed', top:'50%', left: '50%'}}>
+        <Box sx={{position: 'fixed', top:'10%', left: '30%'}}>
           <ClockLoader
             className="spinner"
-            size={150}
+            size={500}
             color={"black"}
             loading={loading}
           />
