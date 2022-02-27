@@ -18,6 +18,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import FontLink from "./FontLink";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import "../../App.css";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -50,16 +51,6 @@ const Navbar = () => {
             <Link to="/">Ukraine</Link>
           </Typography>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-            className="font-link"
-          >
-            LOGO
-          </Typography>
-
           <br />
 
           <Box sx={{ flexGrow: 0 }}>
@@ -89,11 +80,6 @@ const Navbar = () => {
                   <Typography textAlign="center">Map</Typography>
                 </MenuItem>
               </Link>
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
             </Menu>
           </Box>
         </Toolbar>
