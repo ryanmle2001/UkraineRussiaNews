@@ -25,7 +25,7 @@ const News = ({
     <>
       <div className="flex flex-col w-2/3 justify-center gap-y-5 p-4">
         {data.map((newsItem, i) => (
-          <Card>
+          <Card key={i}>
             {newsItem.img && (
               <CardMedia
                 component="img"
