@@ -8,9 +8,7 @@ import { Box } from "@material-ui/core";
 import "./App.css";
 import axios from "axios";
 
-
 function App() {
-
   const [cities, setCities] = useState([]);
   const [cityInfo, setCityInfo] = useState([]);
   const [news, setNews] = useState({});
@@ -18,20 +16,7 @@ function App() {
   // Collect user input
   const [userCity, setUserCity] = useState("");
 
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-    return () => {};
-  }, []);
-
-
-
-  
-
-  const getDataApi = async ({userCity}) => {
+  const getDataApi = async ({ userCity }) => {
     await axios
       .get(`http://localhost:5000/${userCity}`)
       .then((res) => {
@@ -49,15 +34,14 @@ function App() {
       });
   };
 
-
-
   useEffect(() => {
     getDataApi(userCity);
-
-    console.log("app.js -> use effect triggered");
   }, []);
 
-console.log(userCity);
+  useEffect(() => {
+    // console.log("app.js -> use effect triggered userCity");
+  }, []);
+
   return (
     <>
       <Router>
@@ -65,11 +49,13 @@ console.log(userCity);
           <Navbar></Navbar>
           <div className="flex justify-end my-4 w-screen">
             <Box sx={{ mx: "auto", width: 200 }}>
-              <Search cities={cities} setUserCity={setUserCity} userCity={userCity}></Search>
+              <Search
+                cities={cities}
+                setUserCity={setUserCity}
+                userCity={userCity}
+              ></Search>
             </Box>
           </div>
-          {console.log("app.js -> ", news)}
-          {console.log("app.js -> ", cities)}
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/map" element={<Map />} />

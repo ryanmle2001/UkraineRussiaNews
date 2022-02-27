@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -15,10 +15,17 @@ const News = ({
       header: "",
       image: null,
       newsId: "",
-      url: "https://www.cnn.com/europe/live-news/ukraine-russia-news-02-26-22/index.html",
+      url: "",
     },
   ],
 }) => {
+  useEffect(() => {
+    // console.log("News -> ", data);
+  }, [data]);
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <>
       <div className="flex flex-col w-2/3 justify-center gap-y-5 px-4 py-7">
@@ -45,7 +52,8 @@ const News = ({
                 {newsItem.header}
               </Typography>
               <Typography gutterBottom variant="h7" component="div">
-                {newsItem.city} - {newsItem.date.split(".")[0]}
+                {capitalizeFirstLetter(newsItem.city)} -{" "}
+                {newsItem.date.split(".")[0]}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {newsItem.body}

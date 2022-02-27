@@ -3,14 +3,17 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Box } from "@material-ui/core";
 import PacmanLoader from "react-spinners/PacmanLoader";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const [news, setNews] = useState([]);
+  const [city, setCity] = useState("");
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   const getDataApi = async () => {
     await axios
-      .get(`http://localhost:5000/`)
+      .get(`http://localhost:5000/${city}`)
       .then((res) => {
         const {
           data: {
@@ -27,13 +30,16 @@ const Home = () => {
 
   useEffect(() => {
     getDataApi();
+  }, [city]);
 
-    console.log("home -> use effect triggered");
-  }, []);
+  useEffect(() => {
+    setCity(location.state.city);
+  }, [location.state]);
+
+  useEffect(() => {}, [news]);
 
   return (
     <Box>
-      {console.log("data: ", news)}
       <div className="flex justify-center">
         {loading ? (
           <div className="mt-5">

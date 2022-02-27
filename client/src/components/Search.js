@@ -1,34 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, TextField } from "@material-ui/core";
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete from "@mui/material/Autocomplete";
+import { useNavigate } from "react-router-dom";
 
-const options = ["Option 1", "Option 2"];
+const Search = ({ cities, setUserCity }) => {
+  const [selected, setSelected] = useState("");
+  const navigate = useNavigate();
 
-const Search = ({cities, setUserCity, userCity}) => {
-  const [value, setValue] = useState(cities);
-  const [inputValue, setInputValue] = React.useState("");
-  
-  // const new_cities = value?.map(city => city.charAt(0).toUpperCase() + city.slice(1));
+  const handlePush = () => {
+    navigate(`/?${selected}`, { state: { city: selected } });
+  };
 
+  useEffect(() => {
+    handlePush();
+  }, [selected]);
 
   return (
     <Box>
-    <Autocomplete
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      inputValue={inputValue}
-      onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
-        setUserCity(newInputValue);
-      }}
-      id="controllable-states-demo"
-      options={cities }
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Search News" />}
-    />
-  </Box>
+      <Autocomplete
+        onChange={(event, newValue) => {
+          setSelected(newValue);
+        }}
+        id="controllable-states-demo"
+        options={cities}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Search News" />}
+      />
+    </Box>
   );
 };
 
