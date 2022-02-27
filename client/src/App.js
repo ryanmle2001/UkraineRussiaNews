@@ -10,7 +10,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <br />
-      <Box  sx={{ mx: "auto", width: 200 }} >
+      <Box sx={{ mx: "auto", width: 200 }} >
         <Search></Search>
       </Box>
       <br />
