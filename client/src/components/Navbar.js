@@ -18,7 +18,7 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import FontLink from "./FontLink";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import "../../App.css";
+// import "../../App.css";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

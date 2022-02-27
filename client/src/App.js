@@ -69,8 +69,6 @@ function App() {
             <br />
             <Routes>
               <Route exact path="/" element={<Home />} />
-            </Routes>
-            <Routes>
               <Route exact path="/map" element={<Map />} />
             </Routes>
           </Box>
