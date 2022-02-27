@@ -20,8 +20,11 @@ const News = ({
   ],
 }) => {
   useEffect(() => {
-    console.log("News -> ", data);
+    // console.log("News -> ", data);
   }, [data]);
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   return (
     <>
@@ -49,7 +52,8 @@ const News = ({
                 {newsItem.header}
               </Typography>
               <Typography gutterBottom variant="h7" component="div">
-                {newsItem.city} - {newsItem.date.split(".")[0]}
+                {capitalizeFirstLetter(newsItem.city)} -{" "}
+                {newsItem.date.split(".")[0]}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {newsItem.body}

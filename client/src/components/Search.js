@@ -12,7 +12,6 @@ const Search = ({ cities, setUserCity }) => {
   };
 
   useEffect(() => {
-    console.log("Search -> useEffect triggered");
     handlePush();
   }, [selected]);
 

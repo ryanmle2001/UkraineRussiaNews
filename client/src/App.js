@@ -36,12 +36,10 @@ function App() {
 
   useEffect(() => {
     getDataApi(userCity);
-
-    console.log("app.js -> use effect triggered");
   }, []);
 
   useEffect(() => {
-    console.log("app.js -> use effect triggered userCity");
+    // console.log("app.js -> use effect triggered userCity");
   }, []);
 
   return (
@@ -58,8 +56,6 @@ function App() {
               ></Search>
             </Box>
           </div>
-          {console.log("app.js -> ", news)}
-          {console.log("app.js -> ", cities)}
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/map" element={<Map />} />

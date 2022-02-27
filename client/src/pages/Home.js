@@ -22,7 +22,6 @@ const Home = () => {
         } = res;
         setNews(news);
         setLoading(false);
-        console.log("getDataApi -> ", city);
       })
       .catch((err) => {
         console.log(err);
@@ -31,20 +30,16 @@ const Home = () => {
 
   useEffect(() => {
     getDataApi();
-
-    console.log("home -> use effect triggered", city);
   }, [city]);
 
   useEffect(() => {
     setCity(location.state.city);
-    console.log("home -> state changed", city);
   }, [location.state]);
 
   useEffect(() => {}, [news]);
 
   return (
     <Box>
-      {console.log("Home render", city, news)}
       <div className="flex justify-center">
         {loading ? (
           <div className="mt-5">

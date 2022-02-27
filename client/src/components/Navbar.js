@@ -13,13 +13,11 @@ import { Link } from "react-router-dom";
 import { BsFillMapFill } from "react-icons/bs";
 
 const Navbar = () => {
-  // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
   // const handleOpenNavMenu = (event) => {
   //   setAnchorElNav(event.currentTarget);
   // };
-
   // const handleCloseNavMenu = () => {
   //   setAnchorElNav(null);
   // };
