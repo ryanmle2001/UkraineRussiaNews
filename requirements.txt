@@ -3,24 +3,34 @@ beautifulsoup4==4.10.0
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.0.4
+colorama==0.4.4
+
 dateparser==0.7.6
 dnspython==2.2.0
-feedparser==5.2.1
+# feedparser==5.2.1
 Flask==2.0.3
 Flask-Cors==3.0.10
+gensim==3.8.3
 idna==3.3
 itsdangerous==2.1.0
 Jinja2==3.0.3
+joblib==1.1.0
 MarkupSafe==2.1.0
-pygooglenews==0.1.2
+networkx==2.6.3
+nltk==3.7
+numpy==1.22.2
+# pygooglenews==0.1.2
 pymongo==4.0.1
 python-dateutil==2.8.2
 pytz==2021.3
 pytz-deprecation-shim==0.1.0.post0
 regex==2022.1.18
 requests==2.27.1
+scipy==1.8.0
 six==1.16.0
+smart-open==5.2.1
 soupsieve==2.3.1
+tqdm==4.62.3
 tzdata==2021.5
 tzlocal==4.1
 urllib3==1.26.8

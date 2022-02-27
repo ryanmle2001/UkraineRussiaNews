@@ -7,7 +7,7 @@ import { Box } from "@material-ui/core";
 import Map from "./components/Map/Map";
 import ClockLoader from "react-spinners/ClockLoader";
 import "./App.css";
-
+import axios from "axios";
 function App() {
   const [loading, setLoading] = useState(false);
 
@@ -17,6 +17,31 @@ function App() {
       setLoading(false);
     }, 5000);
     return () => {};
+  }, []);
+
+  const [data, setData] = useState();
+  const [cities, setCities] = useState([]);
+  const [news, setNews] = useState({});
+  console.log(data);
+  
+  const getDataApi = async () => {
+    await axios
+      .get(`http://localhost:5000/`)
+      .then((res) => {
+        const {data: {data: {cities, news}}} = res;
+        setCities(cities);
+        setNews(news);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDataApi();
+
+    console.log("use effect triggered");
   }, []);
 
   return (
@@ -35,7 +60,7 @@ function App() {
           <Navbar></Navbar>
           <br />
           <Box sx={{ mx: "auto", width: 200 }}>
-            <Search></Search>
+            <Search cities={cities}></Search>
           </Box>
           <br />
           <Router>
