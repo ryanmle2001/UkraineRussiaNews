@@ -5,24 +5,11 @@ import Map from "./pages/Map";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import { Box } from "@material-ui/core";
-import ClockLoader from "react-spinners/ClockLoader";
 import "./App.css";
 import axios from "axios";
 function App() {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-    return () => {};
-  }, []);
-
-  const [data, setData] = useState();
   const [cities, setCities] = useState([]);
   const [news, setNews] = useState({});
-  console.log(data);
 
   const getDataApi = async () => {
     await axios
@@ -49,31 +36,22 @@ function App() {
 
   return (
     <>
-      {loading ? (
-        <Box sx={{ position: "fixed", top: "10%", left: "30%" }}>
-          <ClockLoader
-            className="spinner"
-            size={500}
-            color={"black"}
-            loading={loading}
-          />
-        </Box>
-      ) : (
-        <Router>
-          <Box>
-            <Navbar></Navbar>
-            <br />
+      <Router>
+        <Box>
+          <Navbar></Navbar>
+          <div className="flex justify-end my-4 w-screen">
             <Box sx={{ mx: "auto", width: 200 }}>
               <Search cities={cities}></Search>
             </Box>
-            <br />
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/map" element={<Map />} />
-            </Routes>
-          </Box>
-        </Router>
-      )}
+          </div>
+          {console.log("app.js -> ", news)}
+          {console.log("app.js -> ", cities)}
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/map" element={<Map />} />
+          </Routes>
+        </Box>
+      </Router>
     </>
   );
 }
