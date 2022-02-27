@@ -16,9 +16,13 @@ with open("ua_cities.json") as file:
 @app.route("/")
 def index():
     news = db.get_national_news()
+    city_info = []
+    for city in cities:
+        city_info.append(db.get_city(city))
     data = {
         "data": {
             "cities": list(cities),
+            "city_info": city_info,
             "news": news
         }
     }
@@ -26,7 +30,7 @@ def index():
 
 @app.route('/<string:city>')
 def load_city(city):
-    if city not in cities:
+    if city.lower() not in cities:
         return redirect("/")
     news = db.get_city_news(city)
     city_info = db.get_city(city)
