@@ -68,11 +68,10 @@ def get_city_news_id(city):
     return news_ids["news"]
 
 def get_national_news():
-    news_ids = db.city.find_one({"name": "ukraine"}, {"news":1, "_id": 0})
+    news_ids = get_city_news_id("Ukraine")
     if news_ids is None:
         return []
-    news_ids = list(news_ids)
-    news = db.news.find({"newsId": {"$in": news_ids}}).sort('date',DESCENDING)
+    news = db.news.find({"newsId": {"$in": news_ids}}, {"_id": 0}).sort('date',DESCENDING)
     return list(news)
 
 def insert_latest_news():
@@ -88,4 +87,5 @@ def insert_latest_news():
 
 if __name__ == "__main__":
     # init_cities()
-    insert_latest_news()
+    # insert_latest_news()
+    print(get_national_news())
