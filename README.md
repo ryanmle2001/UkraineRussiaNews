@@ -1,4 +1,4 @@
-# HackNYU-UkraineRussiaNews
+# UkraineRussiaNews
 
 ## How to set up environment
 * Inside `/venv-app`, create a virtual environment with the following command: `python3 -m venv venv`.
