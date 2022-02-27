@@ -85,7 +85,10 @@ def insert_latest_news():
                 db.news.insert_one(article)
 
 
-if __name__ == "__main__":
-    # init_cities()
-    # insert_latest_news()
-    print(get_national_news())
+# if __name__ == "__main__":
+    # with open("ua.json") as file:
+    #     all_cities = json.load(file)
+    # city_list = []
+    # for loc in all_cities:
+    #     if loc["city"].lower() in cities:
+    #         db.city.update_one({"name": loc["city"]}, {"$set": {"population": loc["population"]}})
