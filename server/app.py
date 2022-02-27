@@ -1,11 +1,12 @@
 from flask import Flask, url_for, render_template, request, redirect, abort, jsonify, session, flash, make_response
+from flask_cors import CORS #comment this on deployment
 import requests
 from pip._vendor import cachecontrol
 import models as db
 
 
 app = Flask(__name__, )
-app.secret_key="123"
+CORS(app)
 
 cities = set()
 with open("ua_cities.json") as file:
@@ -26,7 +27,11 @@ def index():
             "news": news
         }
     }
-    return jsonify(data)
+    response = jsonify(data)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+    # return jsonify(data)
 
 @app.route('/<string:city>')
 def load_city(city):
@@ -40,7 +45,11 @@ def load_city(city):
             "news": news
         }
     }
-    return jsonify(data)
+    response = jsonify(data)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+    # return jsonify(data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
