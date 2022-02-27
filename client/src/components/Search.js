@@ -23,7 +23,7 @@ const Search = ({ cities, setUserCity }) => {
         }}
         id="controllable-states-demo"
         options={cities}
-        sx={{ width: 300 }}
+        sx={{ width: 400 }}
         renderInput={(params) => <TextField {...params} label="Search News" />}
       />
     </Box>

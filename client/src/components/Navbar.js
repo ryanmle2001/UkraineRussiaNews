@@ -31,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar color="transparent" position="static" sx={{ py: 2 }}>
+    <AppBar color="transparent" position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters color="transparent">
           <Typography

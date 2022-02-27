@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Home from "./pages/Home";
-import Map from "./pages/Map";
+import Map from "./pages/Map/Map";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import { Box } from "@material-ui/core";
@@ -46,9 +46,9 @@ function App() {
     <>
       <Router>
         <Box>
-          <Navbar></Navbar>
+          <Navbar/>
           <div className="flex justify-end my-4 w-screen">
-            <Box sx={{ mx: "auto", width: 200 }}>
+            <Box sx={{ mx: "auto" }} fullWidth>
               <Search
                 cities={cities}
                 setUserCity={setUserCity}
