@@ -33,7 +33,11 @@ const Home = () => {
   }, [city]);
 
   useEffect(() => {
-    setCity(location.state.city);
+    if (location.state?.city) {
+      setCity(location.state.city);
+    } else {
+      setCity("");
+    }
   }, [location.state]);
 
   useEffect(() => {}, [news]);

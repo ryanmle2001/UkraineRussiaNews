@@ -26,12 +26,27 @@ const News = ({
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  const checkImage = (img) => {
+    if (
+      img.includes(".jpg") ||
+      img.includes(".jpeg") ||
+      img.includes(".jfif") ||
+      img.includes(".pjpeg") ||
+      img.includes(".pjp") ||
+      img.includes(".png") ||
+      img.includes(".svg")
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
       <div className="flex flex-col w-2/3 justify-center gap-y-5 px-4 py-7">
         {data.map((newsItem, i) => (
-          <Card key={newsItem.newsId}>
-            {newsItem.image && (
+          <Card key={`${i} ${newsItem.newsId}`}>
+            {newsItem.image && checkImage(newsItem.image) && (
               <a
                 href={newsItem.url}
                 target="_blank"
@@ -66,7 +81,7 @@ const News = ({
                   href={newsItem.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="ml-4"
+                  className="mx-4"
                 >
                   Learn More
                 </a>
