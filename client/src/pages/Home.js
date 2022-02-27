@@ -1,8 +1,6 @@
+import News from "../components/News";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import { getData } from "../api";
-import News from "../components/News";
-
 const news_data = [
   {
     title: "test title1",
@@ -27,8 +25,10 @@ const news_data = [
 ];
 
 const Home = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
 
+  console.log(data);
+  
   const getDataApi = async () => {
     await axios
       .get(`http://localhost:5000/`)
