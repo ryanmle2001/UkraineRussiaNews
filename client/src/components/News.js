@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -9,43 +9,60 @@ import Typography from "@mui/material/Typography";
 const News = ({
   data = [
     {
-      title: "",
-      text: "",
-      img: "",
+      body: "",
+      city: "",
+      date: "",
+      header: "",
+      image: null,
+      newsId: "",
+      url: "https://www.cnn.com/europe/live-news/ukraine-russia-news-02-26-22/index.html",
     },
   ],
 }) => {
-  // const [newsFeed, SetNewsFeed] = useState(data);
-
-  // useEffect(() => {
-
-  // }, [third])
-
   return (
     <>
-      <div className="flex flex-col w-2/3 justify-center gap-y-5 p-4">
+      <div className="flex flex-col w-2/3 justify-center gap-y-5 px-4 py-7">
         {data.map((newsItem, i) => (
-          <Card key={i}>
-            {newsItem.img && (
-              <CardMedia
-                component="img"
-                height="140"
-                src={newsItem.img}
-                alt="news image"
-              />
+          <Card key={newsItem.newsId}>
+            {newsItem.image && (
+              <a
+                href={newsItem.url}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-wrap justify-center pt-4"
+              >
+                <CardMedia
+                  className="max-w-[75%] h-auto"
+                  component="img"
+                  src={newsItem.image}
+                  alt="news image"
+                />
+              </a>
             )}
 
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {newsItem.title}
+                {newsItem.header}
+              </Typography>
+              <Typography gutterBottom variant="h7" component="div">
+                {newsItem.city} - {newsItem.date.split(".")[0]}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {newsItem.text}
+                {newsItem.body}
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
+              {/* <Button size="small">Share</Button> */}
+              <Button size="small">
+                <a
+                  href={newsItem.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ml-4"
+                >
+                  Learn More
+                </a>
+              </Button>
             </CardActions>
           </Card>
         ))}
