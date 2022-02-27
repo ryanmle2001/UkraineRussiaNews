@@ -44,7 +44,7 @@ function App() {
   useEffect(() => {
     getDataApi();
 
-    console.log("use effect triggered");
+    console.log("app.js -> use effect triggered");
   }, []);
 
   return (

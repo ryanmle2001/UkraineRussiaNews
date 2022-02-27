@@ -1,7 +1,7 @@
 import News from "../components/News";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {Box} from '@material-ui/core';
+import { Box } from "@material-ui/core";
 
 const news_data = [
   {
@@ -27,13 +27,29 @@ const news_data = [
 ];
 
 const Home = () => {
+  const [news, setNews] = useState([]);
 
+  const getDataApi = async () => {
+    await axios
+      .get(`http://localhost:5000/`)
+      .then((res) => {
+        setNews(res.data.news);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDataApi();
+
+    console.log("home -> use effect triggered");
+  }, []);
 
   return (
     <Box>
-     
+      {console.log("data: ", news)}
       <News data={news_data} />
-   
     </Box>
   );
 };
