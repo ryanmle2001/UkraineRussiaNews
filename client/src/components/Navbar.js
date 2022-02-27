@@ -35,11 +35,11 @@ const Navbar = () => {
     <AppBar color="transparent" position="static" sx={{ py: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters color="transparent">
-          <Typography variant="h3" noWrap color="black" sx={{ mx: "auto" }}>
-            <Link to="/">Ukraine</Link>
+          <Typography variant="h3" color="cyan" noWrap color="black" sx={{ mx: "auto" }}>
+            <Link to="/">UMonitor</Link>
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="open">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AiOutlineMenu />
               </IconButton>
@@ -61,8 +61,8 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               <Link to="/map">
-                <MenuItem key={"map"} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Map</Typography>
+                <MenuItem key={"map"} spacing={2} onClick={handleCloseUserMenu}>
+                <BsFillMapFill color="blue" />  <Typography sx={{marginLeft: 2}} component={Link} to="/map" textAlign="center">Map</Typography>
                 </MenuItem>
               </Link>
             </Menu>

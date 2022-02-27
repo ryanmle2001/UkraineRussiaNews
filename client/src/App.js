@@ -7,33 +7,57 @@ import Search from "./components/Search";
 import { Box } from "@material-ui/core";
 import "./App.css";
 import axios from "axios";
+
+
 function App() {
+
   const [cities, setCities] = useState([]);
+  const [cityInfo, setCityInfo] = useState([]);
   const [news, setNews] = useState({});
 
-  const getDataApi = async () => {
+  // Collect user input
+  const [userCity, setUserCity] = useState("");
+
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+    return () => {};
+  }, []);
+
+
+
+  
+
+  const getDataApi = async ({userCity}) => {
     await axios
-      .get(`http://localhost:5000/`)
+      .get(`http://localhost:5000/${userCity}`)
       .then((res) => {
         const {
           data: {
-            data: { cities, news },
+            data: { cities, news, city_info },
           },
         } = res;
         setCities(cities);
         setNews(news);
+        setCityInfo(city_info);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+
+
   useEffect(() => {
-    getDataApi();
+    getDataApi(userCity);
 
     console.log("app.js -> use effect triggered");
   }, []);
 
+console.log(userCity);
   return (
     <>
       <Router>
@@ -41,7 +65,7 @@ function App() {
           <Navbar></Navbar>
           <div className="flex justify-end my-4 w-screen">
             <Box sx={{ mx: "auto", width: 200 }}>
-              <Search cities={cities}></Search>
+              <Search cities={cities} setUserCity={setUserCity} userCity={userCity}></Search>
             </Box>
           </div>
           {console.log("app.js -> ", news)}
