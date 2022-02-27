@@ -4,9 +4,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 const options = ["Option 1", "Option 2"];
 
-const Search = () => {
-  const [value, setValue] = useState("");
+const Search = ({cities}) => {
+  const [value, setValue] = useState(cities);
   const [inputValue, setInputValue] = React.useState("");
+
+  const new_cities = value.map(city => city.charAt(0).toUpperCase() + city.charAt(1).toLowerCase());
+
 
   return (
     <Box>
@@ -20,7 +23,7 @@ const Search = () => {
           setInputValue(newInputValue);
         }}
         id="controllable-states-demo"
-        options={options}
+        options={new_cities}
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Search News" />}
       />
