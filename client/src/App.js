@@ -8,8 +8,19 @@ import { Box } from "@material-ui/core";
 import ClockLoader from "react-spinners/ClockLoader";
 import "./App.css";
 import axios from "axios";
+
+
 function App() {
+  // Pouring data
   const [loading, setLoading] = useState(false);
+
+  const [cities, setCities] = useState([]);
+  const [cityInfo, setCityInfo] = useState([]);
+  const [news, setNews] = useState({});
+
+  // Collect user input
+  const [userCity, setUserCity] = useState("");
+
 
   useEffect(() => {
     setLoading(true);
@@ -19,34 +30,37 @@ function App() {
     return () => {};
   }, []);
 
-  const [data, setData] = useState();
-  const [cities, setCities] = useState([]);
-  const [news, setNews] = useState({});
-  console.log(data);
 
-  const getDataApi = async () => {
+
+  
+
+  const getDataApi = async ({userCity}) => {
     await axios
-      .get(`http://localhost:5000/`)
+      .get(`http://localhost:5000/${userCity}`)
       .then((res) => {
         const {
           data: {
-            data: { cities, news },
+            data: { cities, news, city_info },
           },
         } = res;
         setCities(cities);
         setNews(news);
+        setCityInfo(city_info);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+
+
   useEffect(() => {
-    getDataApi();
+    getDataApi(userCity);
 
     console.log("app.js -> use effect triggered");
   }, []);
 
+console.log(userCity);
   return (
     <>
       {loading ? (
@@ -64,7 +78,7 @@ function App() {
             <Navbar></Navbar>
             <br />
             <Box sx={{ mx: "auto", width: 200 }}>
-              <Search cities={cities}></Search>
+              <Search cities={cities} setUserCity={setUserCity} userCity={userCity}></Search>
             </Box>
             <br />
             <Routes>

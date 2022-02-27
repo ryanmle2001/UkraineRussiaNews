@@ -1,6 +1,6 @@
 from pygooglenews import GoogleNews
 from bs4 import BeautifulSoup
-from gensim.summarization import summarize
+
 from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
 from urllib.request import urlopen
