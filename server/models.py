@@ -1,8 +1,6 @@
-from pymongo import MongoClient
-from bson.json_util import dumps
+from pymongo import MongoClient, DESCENDING
 import json
-import requests
-
+import utils
 
 f = open('config.json')
 config = json.load(f)
@@ -10,70 +8,84 @@ f.close()
 client = MongoClient(f"mongodb+srv://admin:{config['mongo_password']}@cluster0.fhqco.mongodb.net/ua_ru_news?retryWrites=true&w=majority")
 db = client.ua_ru_news
 
+
+cities = set()
+with open("ua_cities.json") as file:
+    data = file.readlines()
+    for i in data:
+        cities.add(i.strip())
+
 '''
 City fields
 - name: String
-- latitude: String 
-- longitude: String
 - news: newsId[]
 '''
 
 """
 News fields
-newsId: (div id=post_and_bottom, article class = [take id from here]}
+newsId: String same as url 
 city: String 
-date: Datetime (current time - <span class= timeAlert>) 
+date: Date 
 header: String 
 body: String 
-image: String 
 url: String
+image: String 
 """
 
+# Called only once
 def init_cities():
-    with open("ua.json", "r") as file:
-        cities = json.load(file)
-    large_cities = []
-    city_file= []
-    for city in cities:
-        if city["population"] != '' and int(city["population"]) >= 250000:
+    all_cities = []
+    with open("ua.json") as file:
+        all_cities = json.load(file)
+    city_list = []
+    for loc in all_cities:
+        if loc["city"].lower() in cities:
             city_json = {
-                "name": city["city"],
-                "latitude": city["lat"],
-                "longitude": city["lng"],
+                "name": loc["city"],
+                "lat": loc["lat"],
+                "lng": loc["lng"],
                 "news": []
             }
-            large_cities.append(city_json)
-            city_file.append(city["city"].lower())
-    with open("ua_cities.json", "w") as file:
-        for city in city_file:
-            file.write(city)
-            file.write("\n")
-    db.city.insert_many(large_cities)
-
+            city_list.append(city_json)
+    db.city.insert_many(city_list)
 
 def get_city(city):
-    city = db.city.find_one({"name": city.lower()})
-    return dumps(list(city))
-
+    city = db.city.find_one({"name": city.lower().capitalize()}, {"_id": 0})
+    return city
 
 def update_city_news(city, newsId):
-    db.city.update_one({"city": city}, {"$push": {"news": newsId}})
-
+    db.city.update_one({"name": city.lower().capitalize()}, {"$push": {"news": newsId}})
 
 def get_city_news(city):
-    news_ids = list(db.city.find({"city": city}, {"events":1, "_id": 0}))
-    news = []
-    news = db.news.find({"newsId": {"$in": news_ids}})
-    return dumps(list(news))
+    news_ids = db.city.find_one({"name": city.lower().capitalize()}, {"news":1, "_id": 0})["news"]
+    news = db.news.find({"newsId": {"$in": news_ids}},{"_id": 0}).sort('date',DESCENDING)
+    return list(news)
 
+def get_city_news_id(city):
+    news_ids = db.city.find_one({"name": city.lower().capitalize()}, {"news":1, "_id": 0})
+    if news_ids is None:
+        return []
+    return news_ids["news"]
 
-def get_all_news():
-    news = db.news.find({})
-    return dumps(list(news))
+def get_national_news():
+    news_ids = db.city.find_one({"name": "ukraine"}, {"news":1, "_id": 0})
+    if news_ids is None:
+        return []
+    news_ids = list(news_ids)
+    news = db.news.find({"newsId": {"$in": news_ids}}).sort('date',DESCENDING)
+    return list(news)
 
+def insert_latest_news():
+    for city in cities:
+        print(city)
+        articles = utils.scrape_article(city)
+        city_news_ids = set(get_city_news_id(city))
+        for article in articles:
+            if article["newsId"] not in city_news_ids:
+                update_city_news(city, article["newsId"])
+                db.news.insert_one(article)
 
-def insert_news(news):
-    db.news.insert_one(news)
 
 if __name__ == "__main__":
-    init_cities()
+    # init_cities()
+    insert_latest_news()
